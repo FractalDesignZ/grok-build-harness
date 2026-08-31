@@ -1,0 +1,25 @@
+{"id":"A00_BOOTSTRAP","depends_on":[],"deliverable":"consumer package skeleton, uv, just","acceptance":"import, lint, test commands run"}
+{"id":"A01_DOCTOR","depends_on":["A00_BOOTSTRAP"],"deliverable":"environment/GPU doctor","acceptance":"both GPUs detected when present; report saved"}
+{"id":"A02_SOURCE_LOCK","depends_on":["A00_BOOTSTRAP"],"deliverable":"HF SHA lock schema","acceptance":"refuses unlocked confirmation config"}
+{"id":"A03_BYTE_CODEC","depends_on":["A00_BOOTSTRAP"],"deliverable":"UTF-8 byte tokenizer + specials","acceptance":"arbitrary byte round trip; invalid UTF-8 preserved"}
+{"id":"A04_DATA_STREAM","depends_on":["A02_SOURCE_LOCK","A03_BYTE_CODEC"],"deliverable":"streaming adapters + mixture","acceptance":"deterministic first-N window hashes"}
+{"id":"A05_PACKER","depends_on":["A04_DATA_STREAM"],"deliverable":"raw-byte packing and masks","acceptance":"no cross-document leakage"}
+{"id":"A06_GLOBAL_BASELINE","depends_on":["A03_BYTE_CODEC","A05_PACKER"],"deliverable":"BPE and BYTE-1 baselines","acceptance":"smoke overfit + checkpoint reload"}
+{"id":"A07_LOCAL_PATH","depends_on":["A06_GLOBAL_BASELINE"],"deliverable":"local encoder/decoder + patch API","acceptance":"patch-size-one equivalence"}
+{"id":"A08_FIXED_PATCH","depends_on":["A07_LOCAL_PATH"],"deliverable":"fixed/delimiter patchers","acceptance":"causal boundary tests"}
+{"id":"A09_ENTROPY_MODEL","depends_on":["A04_DATA_STREAM"],"deliverable":"tiny causal estimator on aux GPU","acceptance":"calibrated held-out entropy maps"}
+{"id":"A10_ENTROPY_PATCH","depends_on":["A08_FIXED_PATCH","A09_ENTROPY_MODEL"],"deliverable":"offline entropy patcher","acceptance":"no future leakage; rate frozen"}
+{"id":"A11_TRAIN_LOOP","depends_on":["A06_GLOBAL_BASELINE"],"deliverable":"summed-byte loss loop","acceptance":"accumulation equivalence + resume"}
+{"id":"A12_PROFILE","depends_on":["A11_TRAIN_LOOP"],"deliverable":"component profiler","acceptance":"JSON schema + repeatability"}
+{"id":"A13_EVAL","depends_on":["A11_TRAIN_LOOP"],"deliverable":"BPB/robustness/statistics","acceptance":"paired report from toy runs"}
+{"id":"A14_P2_SCREEN","depends_on":["A10_ENTROPY_PATCH","A12_PROFILE","A13_EVAL"],"deliverable":"baseline patch matrix","acceptance":"automated gate report"}
+{"id":"A15_HASH_INPUTS","depends_on":["A14_P2_SCREEN"],"deliverable":"hash/VSA controls","acceptance":"G10 / E5"}
+{"id":"A16_SPHERE","depends_on":["A14_P2_SCREEN"],"deliverable":"spherical/nGPT variants","acceptance":"G5 / E2"}
+{"id":"A17_PHASE","depends_on":["A14_P2_SCREEN"],"deliverable":"frequency-family module","acceptance":"G6 with matched spectral controls"}
+{"id":"A18_HIERARCHY","depends_on":["A14_P2_SCREEN"],"deliverable":"Euclidean/hyperbolic aux heads","acceptance":"G7; residual stays Euclidean"}
+{"id":"A19_SHEAF","depends_on":["A14_P2_SCREEN"],"deliverable":"diagonal restriction loss on trusted graphs","acceptance":"G8 / E6_TRAINER + E6_DETECTOR + collapse audit"}
+{"id":"A20_KOOPMAN","depends_on":["A14_P2_SCREEN"],"deliverable":"stable latent operator","acceptance":"G9 vs MLP and fixed operators"}
+{"id":"A21_TOPOLOGY","depends_on":["A14_P2_SCREEN"],"deliverable":"offline diagnostics only","acceptance":"no training dependency"}
+{"id":"A22_BYTEIFY_135M","depends_on":["A14_P2_SCREEN","A13_EVAL"],"deliverable":"SmolLM2-135M conversion","acceptance":"G11"}
+{"id":"A23_BYTEIFY_360M","depends_on":["A22_BYTEIFY_135M"],"deliverable":"360M conversion","acceptance":"explicit gate approval only"}
+{"id":"A24_HUB_RELEASE","depends_on":[],"deliverable":"verified Hub branch/tag","acceptance":"exact-revision reload matches fixed logits","note":"depends on whichever track passed"}
