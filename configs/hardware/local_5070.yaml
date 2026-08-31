@@ -1,0 +1,11 @@
+device_class: train_5070
+vram_ceiling_gb: 10.8
+precision: bf16
+attention: sdpa_cudnn_or_flex
+allow_flashattention2: false
+allow_fp8: false
+microbatch_start: 1
+activation_checkpointing: true
+aux_device_class: aux_1660ti
+dataloader_workers: 4
+host_ram_reserve_gb: 6

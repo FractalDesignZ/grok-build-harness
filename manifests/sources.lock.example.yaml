@@ -1,0 +1,11 @@
+example: true
+sources:
+  - id: HuggingFaceFW/fineweb-edu
+    repo_type: dataset
+    subset: sample-10BT
+    revision: REPLACE_WITH_COMMIT_SHA
+    example: true
+  - id: HuggingFaceTB/SmolLM2-135M
+    repo_type: model
+    revision: REPLACE_WITH_COMMIT_SHA
+    example: true
