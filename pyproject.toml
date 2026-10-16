@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Grok-executable agentic code + toolchain harness with pure-function scientific gates."
 readme = "README.md"
 requires-python = ">=3.12"
-license = { text = "MIT" }
+license = { text = "PolyForm-Noncommercial-1.0.0" }
 authors = [{ name = "ZuluYokohama" }]
 dependencies = [
   "typer>=0.12",
